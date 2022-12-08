@@ -7,7 +7,10 @@ const transporter = require("../utils/sendmail");
 const CustomAPIError = require("../errors/custom-api");
 const paginate=require("../utils/pagination")
 const {Op}=require("sequelize")  
-const {sorted} =require('../utils/sort')
+const {sorted} =require('../utils/sort');
+const { object } = require("joi");
+const bucket=require("../utils/S3helper");
+const { url } = require("./user");
 
 //sending invite mail
 const sendInvite = async (req, res) => {
@@ -16,6 +19,7 @@ const sendInvite = async (req, res) => {
     const registerURL = `${req.protocol}://${req.get(
         "host"
     )}/api/v1/user/register/${accessToken}`;
+    console.log(registerURL);
     var options={
         from: '"ADMIN" <admin@gmail.com>',
         to: req.body.email,
@@ -26,7 +30,7 @@ const sendInvite = async (req, res) => {
             <p> <a href=${registerURL}> Register Now </a></p>
             <br>This link will expire after 1 day`,
     };
-    await transporter.sendMail(options);
+    //await transporter.sendMail(options);
     res.status(StatusCodes.OK).json({
       message:`Invite sent successfully to user ${req.body.email}`}
     );
@@ -74,25 +78,83 @@ const resendInvite = async (req, res) => {
 };
 
 const getAllUsers=async (req,res)=>{
-  const { page, size,search,sort } = req.query;
-  console.log(sorted(sort));
-  
-  // const sortList = sort.split(',')
-  // console.log(lastName)
-  // console.log(`${lastName}`);
-  var condition = search ? { [Op.or]:[{firstName: { [Op.like]: `%${search}%`}},{email:{ [Op.like]: `%${search}%`} },{lastName: { [Op.like]: `%${search}%`}}]}: null;
-  //var order=sort?[sort,"ASC"]:["email",'ASC']
+  const { page, size, search, sortKey, sortOrder } = req.query;
+    //searching 
+    var condition = search
+        ? {
+              [Op.or]: [
+                  { firstName: { [Op.like]: `%${search}%` } },
+                  { email: { [Op.like]: `%${search}%` } },
+                  { lastName: { [Op.like]: `%${search}%` } },
+              ],
+          }
+        : null;
     const { limit, offset } = paginate.getPagination(page, size);
-    User.findAndCountAll({
-      where: condition,
+    var user=await User.findAndCountAll({
+      attributes: [ "firstName", "lastName", "email", "id","phone","image","url"],
+        where: condition,
         limit,
         offset,
-        order:sorted(sort)
-    }).then((data) => {
-        const response = paginate.getPagingData(data, page, limit);
-        res.status(StatusCodes.OK).json(response);
-    });
-}
+       // order: [ [sortKey, sortOrder]],
+    })
+    const a=await user.rows[0].url
+    console.log(a);
+  //    async function url(user){
+  //     const {firstName,image,lastName}=user
+  //     return  {
+  //       firstName:  firstName,
+  //       lastName:  lastName,
+  //       image:image,
+  //       url: await buc
+      
+  //   }
+  // }
+  // for(i=0;i<user.rows.length;i++){
+  //   const a={
+  //     firstName:user.rows[i].firstName,
+  //     lastName:user.rows[i].lastName,
+  //     url:await user.rows[i].url
+  //   }
+  //   console.log(a);
+  //   i=i+1
+  // }
+
+
+     // res.status(StatusCodes.OK).json(user.rows)
+    //   console.log(a);
+    //console.log("1",user.rows[0].url,"2",user.rows[1].url,"3");
+    // var a=image:"jjj"[{},{},{}]              map(h=>({...h,imageUrl: user.phone}))
+   // const d=user.rows.map(({firstName:user.phone,imageUrl: user.phone}))
+    //console.log(d);
+   // console.log(user.rows);
+  // res.status(StatusCodes.OK).json({count:user.count,rows:[{finduser}]})
+  // const response = await paginate.getPagingData(user, page, limit);
+   
+
+
+  //  const asyncRes = await Promise.all(arr.map(async (i) => {
+  //   await sleep(10);
+  //   return i + 1;
+  // }));
+  //  const a=await Promise.all(user.rows.map( async(a)=>{
+  //   const url=  await `${a.url}`
+  //   console.log(url);
+  //   return {
+  //     firstName:a.firstName,
+  //     lastName:a.lastName,
+  //     url: url
+  //   }
+  //  }))
+  //  const results = await Promise.all(a)
+
+  //   //res.status(StatusCodes.OK).json(user.rows.map(a=>({...a.dataValues,url:a.dataValues.image? await bucket.getSignedURL(a.dataValues.image):null})))
+  //res.status(StatusCodes.OK).json(response.users.map( a=>({...a.dataValues,url: a.dataValues.url})))
+  //
+  res.status(StatusCodes.OK).json(user)
+  
+    
+    
+};
 
 module.exports = { sendInvite, resendInvite, cancelUser,getAllUsers };
 

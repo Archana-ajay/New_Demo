@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
                     defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
                     allowNull: false,
                   },
-        },
+            time:DataTypes.DATE,
+                },
         {
             sequelize,
             modelName: "invite",

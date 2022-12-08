@@ -9,12 +9,12 @@ const userReg = (req, res, next) => {
         lastName:joi.string().required().min(2).max(25),
         email: joi.string().required(),
         password: joi.string().required().min(4).max(25),
-        phone: joi.number().required(),
+        phone: joi.number(),
         address: joi.object({
             city:joi.string().required(),
             state:joi.string().required(),
             country:joi.string().required()
-        }).required()
+        })
     });
     //schema options
     const options = {

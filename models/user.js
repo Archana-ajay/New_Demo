@@ -1,13 +1,16 @@
 "use strict";
 const { Model } = require("sequelize");
+const hi=require("../utils/pagination");
+const { get } = require("../utils/sendmail");
+const bucket=require('../utils/S3helper')
+const moment = require('moment');
+	
+
+
 module.exports = (sequelize, DataTypes) => {
     class user extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
         static associate() {
+           //user.hasMany(model.user_password,{ foreignKey: 'id' });
             //define association here
         }
     }
@@ -15,24 +18,47 @@ module.exports = (sequelize, DataTypes) => {
         {
             firstName: DataTypes.STRING,
             lastName: DataTypes.STRING,
+            fullName:{
+                type:DataTypes.VIRTUAL,
+                get(){
+                    return this.getDataValue("firstName")+" "+this.getDataValue("lastName")
+                }
+            },
             email: DataTypes.STRING,
-            password: DataTypes.STRING,
             phone: DataTypes.BIGINT,
+            image:DataTypes.STRING,
+            url:{
+                type:DataTypes.VIRTUAL,
+                  get(){
+                        return bucket.getSignedURL(this.image)
+            }},
             address: {
                 type:DataTypes.JSON,
+
+    
                 
                 // values:{
                 //     city:DataTypes.STRING,
                 //     country:DataTypes.STRING,
                 //     state:DataTypes.STRING
-                // }     
+                // }   
+            },
+            passwordExpiry:{ 
+                type:DataTypes.DATEONLY,
             },
         },
+
+        
+
         {
             sequelize,
             modelName: "user",
             timestamps:true
         },
     );
+    user.prototype.test= function(){
+        const a= bucket.getSignedURL(this.image)
+        return a
+        }
     return user;
 };

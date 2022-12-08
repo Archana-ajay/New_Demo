@@ -6,6 +6,11 @@ exports.generateAccessToken = (payload) => {
         expiresIn :  process.env.JWT_LIFETIME
     });
 };
+exports.generateAccessToken1 = (payload,pass) => {
+    return jwt.sign({ username:payload,password:pass },process.env.JWT_SECRET ,{
+        expiresIn :  process.env.JWT_LIFETIME
+    });
+};
 
 exports.verifyToken = (token) => {
     // eslint-disable-next-line no-unused-vars
