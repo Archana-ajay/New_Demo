@@ -10,8 +10,8 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "eslint --fix",
-      "git add"
+      "npm run ",
+      "git add lint:fix"
     ]
   },
   "scripts": {

@@ -1,6 +1,6 @@
 const moment = require('moment');
 	
-const a=	moment('2022-11-29 17:35:08.046+05:30').fromNow().slice(0,2)
+        const a=	moment('2022-11-29 17:35:08.046+05:30').fromNow().slice(0,2)
 console.log(a);
 
  const tomorrow = new Date();
