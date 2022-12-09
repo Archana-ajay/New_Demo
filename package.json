@@ -12,18 +12,6 @@
   },
   "author": "",
   "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "eslint --fix",
-      "prettier --write .",
-      "git add"
-    ]
-  },
   "dependencies": {
     "aws-sdk": "^2.1261.0",
     "bcrypt": "^5.1.0",
@@ -57,5 +45,17 @@
     "lint-staged": "^13.1.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "prettier --write .",
+      "git add"
+    ]
+  },
 }
