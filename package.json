@@ -8,21 +8,18 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "**/*.js": [
       "eslint --fix",
       "prettier --write .",
       "git add"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "dependencies": {
     "aws-sdk": "^2.1261.0",
