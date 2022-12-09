@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const hi=require("../utils/pagination");
+          const hi=require("../utils/pagination");
                 const { get } = require("../utils/sendmail");
                const bucket=require('../utils/S3helper')
                           const moment = require('moment');
