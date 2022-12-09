@@ -3,17 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "npm run ",
-      "git add lint:fix"
-    ]
-  },
   "scripts": {
     "start": "nodemon app.js",
     "format:check": "prettier --check .",
@@ -23,6 +12,18 @@
   },
   "author": "",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "prettier --write .",
+      "git add"
+    ]
+  },
   "dependencies": {
     "aws-sdk": "^2.1261.0",
     "bcrypt": "^5.1.0",
