@@ -15,8 +15,8 @@
   "license": "ISC",
   "lint-staged": {
     "**/*.js": [
-      "eslint --fix .",
-      "prettier --write .",
+      "npm run lint:fix",
+      "npm run format:write",
       "git add"
     ],
     "*.js": "eslint --cache --fix"
