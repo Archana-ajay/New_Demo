@@ -41,7 +41,7 @@
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.2",
+    "husky": "^8.0.0",
     "lint-staged": "^13.1.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1"
@@ -53,9 +53,9 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "eslint --fix",
-      "prettier --write .",
+      "npm run eslint --fix",
+      "npm run prettier --write .",
       "git add"
     ]
-  },
+  }
 }
