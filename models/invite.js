@@ -14,26 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     invite.init(
         {
             name: DataTypes.STRING,
-            email:{ type: DataTypes.STRING,
-                unique:true},
+            email: { type: DataTypes.STRING, unique: true },
             status: {
-                
-                type:DataTypes.STRING,
+                type: DataTypes.STRING,
                 values: ["waiting", "completed"],
-                defaultValue: "waiting"},
-            action:{ type:DataTypes.BOOLEAN,
-                defaultValue:true},
-            createdat: {
-                    type: "TIMESTAMP",
-                    defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-                    allowNull: false,
-                  },
-            time:DataTypes.DATE,
-                },
+                defaultValue: "waiting",
+            },
+            action: { type: DataTypes.BOOLEAN, defaultValue: true },
+        },
         {
             sequelize,
             modelName: "invite",
-            timestamps:true
         }
     );
     return invite;

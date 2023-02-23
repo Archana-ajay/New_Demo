@@ -1,0 +1,19 @@
+[{
+    "country":"USA", 
+    "state":"New York",
+    "city": "New York city"
+  },{
+    "country":"USA", 
+    "state":"New York",
+    "city": "Buffalo"
+  },
+  {
+    "country":"USA", 
+    "state":"New York",
+    "city": "Albany"
+  },
+  {
+    "country":"USA", 
+    "state":"New York",
+    "city": "Hunt"
+  }]

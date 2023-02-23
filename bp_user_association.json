@@ -1,0 +1,50 @@
+[
+    {
+        "bp_user_association_id": "7cf77242-181c-45a2-94a5-2728974e8805",
+        "isactive": "Y",
+        "created": "2019-02-11T16:02:46.533Z",
+        "createdby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "updated": "2019-02-11T16:02:46.533Z",
+        "updatedby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "name": "Beneficial owner",
+        "description": null,
+        "shortcode": null,
+        "sequenceno": 1
+    },
+    {
+        "bp_user_association_id": "f63eda23-26fc-4594-b398-813c82f3e33b",
+        "isactive": "Y",
+        "created": "2019-02-11T16:03:17.764Z",
+        "createdby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "updated": "2019-02-11T16:03:17.764Z",
+        "updatedby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "name": "Investor",
+        "description": null,
+        "shortcode": null,
+        "sequenceno": 1
+    },
+    {
+        "bp_user_association_id": "ca51143d-9486-478b-a1cd-8051d682b7e0",
+        "isactive": "Y",
+        "created": "2019-02-11T16:03:35.422Z",
+        "createdby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "updated": "2019-02-11T16:03:35.422Z",
+        "updatedby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "name": "Controlling Managers & Operators",
+        "description": null,
+        "shortcode": null,
+        "sequenceno": 1
+    },
+    {
+        "bp_user_association_id": "41c4204b-ecfd-494c-a921-1357463d1161",
+        "isactive": "N",
+        "created": "2019-02-11T16:03:08.036Z",
+        "createdby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "updated": "2019-02-11T16:03:08.036Z",
+        "updatedby": "4d5a35eb-8d4a-4fba-859c-20c38ee50acc",
+        "name": "Registered owner",
+        "description": null,
+        "shortcode": null,
+        "sequenceno": 1
+    }
+]
